@@ -21,13 +21,17 @@ const init = async (req,res,next) => {
         CREATE TABLE notes(
             id SERIAL PRIMARY KEY,
             name VARCHAR(50),
-            txt VARCHAR(50),
+            txt VARCHAR(255) NOT NULL,
             created_at TIMESTAMP DEFAULT now(),
             updated_at TIMESTAMP DEFAULT now(),
-            ranking DEFAULT 3 NOT NULL,
-            category_id DEFAULT 3 NOT NULL
+            ranking INTEGER DEFAULT 3 NOT NULL,
+            category_id INTEGER REFERENCES categories(id) NOT NULL
         );
         
+        INSERT INTO categories (name) VALUES ('Mary');
+        INSERT INTO categories (name) VALUES ('Gary');
+        INSERT INTO categories (name) VALUES ('Barry');
+        INSERT INTO categories (name) VALUES ('Larry');
 
     `
 
@@ -38,3 +42,5 @@ const init = async (req,res,next) => {
     })
 
 }
+
+init()
