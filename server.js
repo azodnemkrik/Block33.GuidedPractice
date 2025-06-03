@@ -20,7 +20,6 @@ const init = async (req,res,next) => {
 
         CREATE TABLE notes(
             id SERIAL PRIMARY KEY,
-            name VARCHAR(50),
             txt VARCHAR(255) NOT NULL,
             created_at TIMESTAMP DEFAULT now(),
             updated_at TIMESTAMP DEFAULT now(),
@@ -28,10 +27,20 @@ const init = async (req,res,next) => {
             category_id INTEGER REFERENCES categories(id) NOT NULL
         );
         
-        INSERT INTO categories (name) VALUES ('Mary');
-        INSERT INTO categories (name) VALUES ('Gary');
-        INSERT INTO categories (name) VALUES ('Barry');
-        INSERT INTO categories (name) VALUES ('Larry');
+        INSERT INTO categories (name) VALUES ('food');
+        INSERT INTO categories (name) VALUES ('movie');
+        INSERT INTO categories (name) VALUES ('toy');
+        INSERT INTO categories (name) VALUES ('animalg');
+
+                
+        INSERT INTO notes (txt, ranking, category_id) VALUES ('Potato', 1 , (SELECT id FROM categories WHERE name='food'));
+        INSERT INTO notes (txt, ranking, category_id) VALUES ('Shawshank Redemption', 3 , (SELECT id FROM categories WHERE name='movie'));
+        INSERT INTO notes (txt, ranking, category_id) VALUES ('LEGO', 4 , (SELECT id FROM categories WHERE name='toy'));
+        INSERT INTO notes (txt, ranking, category_id) VALUES ('cat', 3 , (SELECT id FROM categories WHERE name='animal'));
+        INSERT INTO notes (txt, ranking, category_id) VALUES ('Pickle', 4 , (SELECT id FROM categories WHERE name='food'));
+        INSERT INTO notes (txt, ranking, category_id) VALUES ('Star Wars', 2 , (SELECT id FROM categories WHERE name='movie'));
+        INSERT INTO notes (txt, ranking, category_id) VALUES ('Transformers', 1 , (SELECT id FROM categories WHERE name='toy'));
+        INSERT INTO notes (txt, ranking, category_id) VALUES ('dog', 5 , (SELECT id FROM categories WHERE name='animal'));
 
     `
 
